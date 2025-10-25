@@ -1,0 +1,2264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | The Wize Auto Transport</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0d3b66;
+            --secondary: #f8b500;
+            --accent: #d4af37;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background-color: var(--secondary);
+            color: var(--dark);
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background-color: #e6a500;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0d3b66;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+        }
+
+        nav li {
+            margin-left: 2rem;
+        }
+
+        nav a {
+            font-weight: 600;
+            position: relative;
+        }
+
+        nav a.active {
+            color: var(--primary);
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: var(--transition);
+        }
+
+        nav a:hover:after, nav a.active:after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        /* Page Header */
+        .page-header2 {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('assets/') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 8rem 0 5rem;
+            margin-top: 70px;
+        }
+
+        .page-header2 h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header2 p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Contact Page */
+        .contact-page {
+            padding: 5rem 0;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-details {
+            margin: 2rem 0;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-detail i {
+            background-color: var(--accent);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .contact-detail h4 {
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-detail p {
+            margin: 0;
+        }
+
+        .contact-info iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+            border-radius: 8px;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .social-links {
+            margin-top: 2rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        /* 🔥 CALCULATOR STYLES */
+        .calculator-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .calculator-header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        
+        .calculator-header h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .calculator-header p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+        
+        .calculator-content {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            overflow-y: auto;
+            max-height: 800px;
+        }
+        
+        .form-section {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .form-group {
+            margin-bottom: 0;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+            font-size: 0.85rem;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(13, 59, 102, 0.1);
+        }
+        
+        .zip-preview {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 3px;
+            min-height: 16px;
+            font-style: italic;
+        }
+        
+        .button-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .calc-btn {
+            padding: 12px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex: 1;
+        }
+        
+        .calc-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
+        
+        .search-btn {
+            background: var(--primary);
+        }
+        
+        .search-btn:hover {
+            background: #0a2d4d;
+        }
+        
+        .clear-btn {
+            background: var(--secondary);
+        }
+        
+        .clear-btn:hover {
+            background: #c19d2f;
+        }
+        
+        .calc-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .results-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .location-card {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 12px;
+            border: 1px solid #eaeaea;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .card-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .location-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            flex: 1;
+        }
+        
+        .info-item {
+            padding: 8px;
+            background: white;
+            border-radius: 4px;
+            text-align: center;
+            border: 1px solid #eaeaea;
+            font-size: 0.8rem;
+        }
+        
+        .info-item strong {
+            display: block;
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 3px;
+        }
+        
+        .quote-section {
+            background: white;
+            border-radius: 6px;
+            padding: 15px;
+            border: 1px solid #eaeaea;
+            display: none;
+        }
+        
+        .quote-header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .quote-header h3 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .quote-subtitle {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 3px;
+        }
+        
+        .map-container {
+            height: 150px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #eaeaea;
+            overflow: hidden;
+        }
+        
+        .stats-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 5px;
+            text-align: center;
+            border: 1px solid #eaeaea;
+        }
+        
+        .stat-card strong {
+            display: block;
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .pricing-section {
+            margin-bottom: 15px;
+        }
+        
+        .pricing-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .price-card {
+            background: white;
+            padding: 12px;
+            border-radius: 5px;
+            text-align: center;
+            border: 1px solid #eaeaea;
+        }
+        
+        .price-card strong {
+            display: block;
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .price-main {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 3px;
+        }
+        
+        .price-accent {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 3px;
+        }
+        
+        .price-note {
+            font-size: 0.7rem;
+            color: #888;
+        }
+        
+        .vehicle-types {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .vehicle-card {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            border: 1px solid #eaeaea;
+        }
+        
+        .vehicle-card strong {
+            display: block;
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .disclaimer {
+            text-align: center;
+            font-size: 0.65rem;
+            color: #888;
+            margin-top: 12px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #eaeaea;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .empty-state {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+        }
+        
+        .error-message {
+            color: #dc3545;
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.8rem;
+            margin-top: 8px;
+        }
+        
+        .leaflet-container {
+            font-size: 0.75rem;
+        }
+        
+        /* Custom scrollbar */
+        .calculator-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .calculator-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+        
+        .calculator-content::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 3px;
+        }
+        
+        .calculator-content::-webkit-scrollbar-thumb:hover {
+            background: #0a2d4d;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        /* New styles for manual input */
+        .manual-input-container {
+            display: none;
+            margin-top: 8px;
+        }
+        
+        .manual-input-container.show {
+            display: block;
+        }
+        
+        .surcharge-notice {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 4px;
+            padding: 8px;
+            margin-top: 10px;
+            font-size: 0.75rem;
+            color: #856404;
+            text-align: center;
+        }
+        
+        .vehicle-type-indicator {
+            background: #e9f7ef;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+            padding: 8px;
+            margin-bottom: 10px;
+            font-size: 0.75rem;
+            color: #155724;
+            text-align: center;
+        }
+        
+        .forklift-notice {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+            padding: 8px;
+            margin-top: 10px;
+            font-size: 0.75rem;
+            color: #721c24;
+            text-align: center;
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 5rem 0;
+            background-color: var(--light);
+        }
+
+        .map-section h2 {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .map-section > .container > p {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .map-placeholder {
+            background-color: white;
+            border-radius: 10px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+
+        .map-placeholder i {
+            font-size: 4rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .service-areas {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .area-group h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .area-group ul {
+            list-style: none;
+        }
+
+        .area-group li {
+            padding: 0.3rem 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-col h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-col p, .footer-col a {
+            color: #bdc3c7;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-col a {
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-col a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #34495e;
+        }
+
+        .footer-bottom p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-areas {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 1rem;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .vehicle-types {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-header2 h1 {
+                font-size: 2rem;
+            }
+            
+            .service-areas {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+         /* 🔥 BOOK NOW BUTTON STYLES */
+        .nav-book-now {
+            background-color: var(--primary);
+            color: white !important;
+            padding: 0.4rem 1.5rem !important;
+            border-radius: 4px;
+            margin-left: 0.1rem;
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+        }
+
+        .nav-book-now:hover {
+            background-color: var(--secondary);
+            color: var(--dark) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(248, 181, 0, 0.3);
+        }
+
+        /* Mobile menu book now button */
+        @media (max-width: 768px) {
+            .nav-book-now {
+                margin: 1rem auto;
+                display: block;
+                width: 80%;
+                text-align: center;
+            }
+        }
+
+        /* 🔥 BOOK NOW BUTTON STYLES */
+        .nav-book-now {
+            background-color: var(--primary);
+            color: white !important;
+            padding: 0.4rem 1.5rem !important;
+            border-radius: 7px;
+            margin-left: 0.1rem;
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+        }
+
+        .nav-book-now:hover {
+            background-color: var(--secondary);
+            color: var(--dark) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(248, 181, 0, 0.3);
+        }
+
+        /* Mobile menu book now button */
+        @media (max-width: 768px) {
+            .nav-book-now {
+                margin: 1rem auto;
+                display: block;
+                width: 80%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<!-- Simple Protection Script -->
+<script>
+// Basic Right-Click Protection
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+
+// Developer Tools Protection  
+document.addEventListener('keydown', function(e) {
+    // Block F12
+    if (e.key === 'F12') {
+        e.preventDefault();
+        return false;
+    }
+    // Block Ctrl+Shift+I
+    if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+        e.preventDefault();
+        return false;
+    }
+    // Block Ctrl+U
+    if (e.ctrlKey && e.key === 'u') {
+        e.preventDefault();
+        return false;
+    }
+});
+
+// Console Warning
+console.log('%c🔒 STOP!', 'color: red; font-size: 30px; font-weight: bold;');
+console.log('%cThis website is protected by copyright.', 'color: orange; font-size: 16px;');
+console.log('%cThe Wize Auto Transport - All rights reserved', 'color: orange; font-size: 14px;');
+</script>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1>The <span>Wize</span> Auto Transport</h1>
+            </div>
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                     <!-- 🔥 UPDATED BOOK NOW BUTTON -->
+                    <li><a href="booking-form.html" class="nav-book-now" target="_blank">Book Now</a></li>
+                </ul>
+                <button class="mobile-menu-btn" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header2">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>Get in touch for a free quote or to learn more about our services</p>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="contact-page">
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>Let's Get Your Vehicle Moving</h2>
+                    <p>Ready to ship your car or fleet? Contact The Wize Auto Transport today for a free quote or
+                        personalized consultation.</p>
+
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>307-453-0502</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>info@thewizeagency.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Address</h4>
+                                <p>1 Barney Rd Clifton Park, NY 12065, USA</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Business Hours</h4>
+                                <p>Monday - Saturday : 9am - 6pm EST</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2925.29190469852!2d-73.8079879!3d42.84556919999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89de136d751401d5%3A0x464c2ad872831e6f!2s1%20Barney%20Rd%2C%20Clifton%20Park%2C%20NY%2012065%2C%20USA!5e0!3m2!1sen!2s!4v1761241672136!5m2!1sen!2s"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                    <div class="social-links">
+                        <h3>Follow Us</h3>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 🔥 CALCULATOR INTEGRATED HERE -->
+                <div class="calculator-card">
+                    <div class="calculator-header">
+                        <h3>Get Instant Vehicle Transport Quote</h3>
+                    </div>
+                    
+                    <div class="calculator-content">
+                        <div id="customerInfo" class="form-section">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fullName">Full Name *</label>
+                                    <input type="text" id="fullName" placeholder="Enter your full name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number *</label>
+                                    <input type="tel" id="phone" placeholder="Enter your phone number">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" placeholder="Enter your email address">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="pickupZip">Pickup ZIP Code *</label>
+                                    <input type="text" id="pickupZip" placeholder="Enter ZIP code" maxlength="5">
+                                    <div id="pickupPreview" class="zip-preview"></div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="deliveryZip">Delivery ZIP Code *</label>
+                                    <input type="text" id="deliveryZip" placeholder="Enter ZIP code" maxlength="5">
+                                    <div id="deliveryPreview" class="zip-preview"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="vehicleMaker">Vehicle Maker *</label>
+                                    <select id="vehicleMaker">
+                                        <option value="">Select Manufacturer</option>
+                                        <option value="Toyota">Toyota</option>
+                                        <option value="Ford">Ford</option>
+                                        <option value="Chevrolet">Chevrolet</option>
+                                        <option value="Honda">Honda</option>
+                                        <option value="Nissan">Nissan</option>
+                                        <option value="Jeep">Jeep</option>
+                                        <option value="BMW">BMW</option>
+                                        <option value="Mercedes-Benz">Mercedes-Benz</option>
+                                        <option value="Audi">Audi</option>
+                                        <option value="Lexus">Lexus</option>
+                                        <option value="Hyundai">Hyundai</option>
+                                        <option value="Kia">Kia</option>
+                                        <option value="Subaru">Subaru</option>
+                                        <option value="Volkswagen">Volkswagen</option>
+                                        <option value="Mazda">Mazda</option>
+                                        <option value="Volvo">Volvo</option>
+                                        <option value="Porsche">Porsche</option>
+                                        <option value="Tesla">Tesla</option>
+                                        <option value="Acura">Acura</option>
+                                        <option value="Infiniti">Infiniti</option>
+                                        <option value="Cadillac">Cadillac</option>
+                                        <option value="Lincoln">Lincoln</option>
+                                        <option value="Buick">Buick</option>
+                                        <option value="Chrysler">Chrysler</option>
+                                        <option value="Dodge">Dodge</option>
+                                        <option value="Ram">Ram</option>
+                                        <option value="GMC">GMC</option>
+                                        <option value="Jaguar">Jaguar</option>
+                                        <option value="Land Rover">Land Rover</option>
+                                        <option value="Mitsubishi">Mitsubishi</option>
+                                        <option value="Mini">Mini</option>
+                                        <option value="Fiat">Fiat</option>
+                                        <option value="Alfa Romeo">Alfa Romeo</option>
+                                        <option value="Genesis">Genesis</option>
+                                        <option value="Maserati">Maserati</option>
+                                        <option value="Bentley">Bentley</option>
+                                        <option value="Ferrari">Ferrari</option>
+                                        <option value="Lamborghini">Lamborghini</option>
+                                        <option value="Rolls-Royce">Rolls-Royce</option>
+                                        <option value="Aston Martin">Aston Martin</option>
+                                        <option value="McLaren">McLaren</option>
+                                        <option value="Bugatti">Bugatti</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="vehicleModel">Vehicle Model *</label>
+                                    <select id="vehicleModel" disabled>
+                                        <option value="">Select Maker First</option>
+                                    </select>
+                                    <div id="vehicleModelManual" class="manual-input-container">
+                                        <input type="text" id="vehicleModelInput" placeholder="Enter vehicle model">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="vehicleYear">Vehicle Year *</label>
+                                    <select id="vehicleYear">
+                                        <option value="">Select Year</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2015">2015</option>
+                                        <option value="manual">Enter Manually</option>
+                                    </select>
+                                    <div id="vehicleYearManual" class="manual-input-container">
+                                        <input type="text" id="vehicleYearInput" placeholder="Enter vehicle year" maxlength="4">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="carCondition">Car Condition *</label>
+                                    <select id="carCondition">
+                                        <option value="">Select Condition</option>
+                                        <option value="running">Running</option>
+                                        <option value="nonRunningSteeringBrakes">Non-Running (Steering & Brakes Work)</option>
+                                        <option value="nonRunning">Non-Running</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="button-row">
+                            <button id="searchBtn" class="calc-btn search-btn" onclick="getQuotes()">Get Quotes</button>
+                            <button class="calc-btn clear-btn" onclick="clearAll()">Clear</button>
+                        </div>
+                        
+                        <div class="results-row">
+                            <div class="location-card">
+                                <div class="card-header">
+                                    <div class="card-icon">🏁</div>
+                                    Pickup Location
+                                </div>
+                                <div id="pickupResult" class="empty-state">
+                                    Enter ZIP code
+                                </div>
+                            </div>
+                            
+                            <div class="location-card">
+                                <div class="card-header">
+                                    <div class="card-icon">🚗</div>
+                                    Delivery Location
+                                </div>
+                                <div id="deliveryResult" class="empty-state">
+                                    Enter ZIP code
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="quoteSection" class="quote-section">
+                            <div class="quote-header">
+                                <h3>Transport Quote</h3>
+                                <p class="quote-subtitle">Based on current market rates</p>
+                            </div>
+                            
+                            <div id="routeMap" class="map-container"></div>
+                            
+                            <div class="stats-row">
+                                <div class="stat-card">
+                                    <strong>Distance</strong>
+                                    <div id="drivingDistance" class="stat-value">-</div>
+                                </div>
+                                <div class="stat-card">
+                                    <strong>Transit Time</strong>
+                                    <div id="travelTime" class="stat-value">-</div>
+                                </div>
+                            </div>
+                            
+                            <div id="vehicleTypeIndicator" class="vehicle-type-indicator" style="display: none;"></div>
+                            
+                            <div class="pricing-section">
+                                <div class="pricing-row">
+                                    <div class="price-card">
+                                        <strong>Standard Rate</strong>
+                                        <div id="haulingCost" class="price-main">-</div>
+                                        <div class="price-note">Base transport cost</div>
+                                    </div>
+                                    <div class="price-card">
+                                        <strong>Market Price Range</strong>
+                                        <div id="rateRange" class="price-accent">-</div>
+                                        <div class="price-note">Based on current demand</div>
+                                    </div>
+                                </div>
+                                
+                                <div id="surchargeNotice" class="surcharge-notice" style="display: none;"></div>
+                                <div id="forkliftNotice" class="forklift-notice" style="display: none;"></div>
+                                
+                                <div class="vehicle-types">
+                                    <div class="vehicle-card">
+                                        <strong>SUV / Large Vehicle</strong>
+                                        <div id="suvCost" class="price-accent">-</div>
+                                        <div class="price-note">+15-25%</div>
+                                    </div>
+                                    <div class="vehicle-card">
+                                        <strong>Luxury / Exotic</strong>
+                                        <div id="luxuryCost" class="price-accent">-</div>
+                                        <div class="price-note">+30-50%</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="disclaimer">
+                                <p>Prices are estimates based on current market conditions. Actual rates may vary based on vehicle type, seasonality, and carrier availability.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="container">
+            <h2>Nationwide Service Area</h2>
+            <p>We provide door-to-door auto transport services across the continental U.S.</p>
+            <div class="map-placeholder">
+                <i class="fas fa-map-marked-alt"></i>
+                <h3>Service Coverage Map</h3>
+                <p>We serve all 48 contiguous states with reliable auto transport services.</p>
+            </div>
+            <div class="service-areas">
+                <div class="area-group">
+                    <h4>East Coast</h4>
+                    <ul>
+                        <li>New York</li>
+                        <li>Florida</li>
+                        <li>Georgia</li>
+                        <li>North Carolina</li>
+                    </ul>
+                </div>
+                <div class="area-group">
+                    <h4>Midwest</h4>
+                    <ul>
+                        <li>Illinois</li>
+                        <li>Texas</li>
+                        <li>Ohio</li>
+                        <li>Michigan</li>
+                    </ul>
+                </div>
+                <div class="area-group">
+                    <h4>West Coast</h4>
+                    <ul>
+                        <li>California</li>
+                        <li>Washington</li>
+                        <li>Oregon</li>
+                        <li>Arizona</li>
+                    </ul>
+                </div>
+                <div class="area-group">
+                    <h4>Central</h4>
+                    <ul>
+                        <li>Colorado</li>
+                        <li>Missouri</li>
+                        <li>Tennessee</li>
+                        <li>Oklahoma</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>The Wize Auto Transport</h3>
+                    <p>Your trusted partner in nationwide auto logistics. We make vehicle shipping simple, reliable, and
+                        affordable.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="faq.html">FAQs</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="services.html#auto-transport">Auto Transport</a></li>
+                    <li><a href="services.html#freight-commercial">Freight & Commercial</a></li>
+                    <li><a href="services.html#motorcycle-specialty">Motorcycle Transport</a></li>
+                    <li><a href="services.html#heavy-equipment">Heavy Equipment</a></li>
+                </ul>
+            </div>
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Insurance Info</a></li>
+                        <li><a href="#">Carrier Agreement</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 The Wize Auto Transport. All rights reserved.</p>
+                <p>"Your trusted partner in nationwide auto logistics."</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            document.getElementById('nav-menu').classList.toggle('active');
+            this.querySelector('i').classList.toggle('fa-bars');
+            this.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // 🔥 CALCULATOR JAVASCRIPT
+        // Database of ZIP codes with city and state information
+        const zipCodeDatabase = {
+            '10001': { city: 'New York', state: 'New York', stateAbbr: 'NY', lat: 40.7506, lng: -73.9973 },
+            '90210': { city: 'Beverly Hills', state: 'California', stateAbbr: 'CA', lat: 34.0901, lng: -118.4065 },
+            '60601': { city: 'Chicago', state: 'Illinois', stateAbbr: 'IL', lat: 41.8853, lng: -87.6221 },
+            '75201': { city: 'Dallas', state: 'Texas', stateAbbr: 'TX', lat: 32.7942, lng: -96.8047 },
+            '33101': { city: 'Miami', state: 'Florida', stateAbbr: 'FL', lat: 25.7743, lng: -80.1937 },
+            '20001': { city: 'Washington', state: 'District of Columbia', stateAbbr: 'DC', lat: 38.9122, lng: -77.0177 },
+            '98101': { city: 'Seattle', state: 'Washington', stateAbbr: 'WA', lat: 47.6038, lng: -122.3301 },
+            '80202': { city: 'Denver', state: 'Colorado', stateAbbr: 'CO', lat: 39.7508, lng: -104.9963 },
+            '19102': { city: 'Philadelphia', state: 'Pennsylvania', stateAbbr: 'PA', lat: 39.9516, lng: -75.1666 },
+            '94102': { city: 'San Francisco', state: 'California', stateAbbr: 'CA', lat: 37.7793, lng: -122.4193 }
+        };
+
+        // Enhanced Vehicle models database with proper categorization
+        const vehicleModels = {
+            'Toyota': {
+                'Sedan': ['Camry', 'Corolla', 'Avalon', 'Prius', 'Mirai', 'GR86', 'GR Supra'],
+                'SUV': ['RAV4', 'Highlander', '4Runner', 'Sequoia', 'Venza', 'C-HR', 'bZ4X'],
+                'Pickup Truck': ['Tacoma', 'Tundra'],
+                'Minivan': ['Sienna']
+            },
+            'Ford': {
+                'Sedan': ['Fusion', 'Taurus', 'Mustang'],
+                'SUV': ['Explorer', 'Escape', 'Edge', 'Expedition', 'Bronco', 'Bronco Sport', 'EcoSport'],
+                'Pickup Truck': ['F-150', 'F-250', 'F-350', 'Ranger', 'Maverick'],
+                'Van': ['Transit', 'Transit Connect']
+            },
+            'Chevrolet': {
+                'Sedan': ['Malibu', 'Impala', 'Spark', 'Sonic', 'Bolt EV'],
+                'SUV': ['Equinox', 'Traverse', 'Tahoe', 'Suburban', 'Trax', 'Blazer', 'Bolt EUV'],
+                'Pickup Truck': ['Silverado 1500', 'Silverado 2500HD', 'Silverado 3500HD', 'Colorado'],
+                'Sports Car': ['Camaro', 'Corvette']
+            },
+            'Honda': {
+                'Sedan': ['Civic', 'Accord', 'Insight'],
+                'SUV': ['CR-V', 'Pilot', 'HR-V', 'Passport', 'Ridgeline'],
+                'Minivan': ['Odyssey']
+            },
+            'Nissan': {
+                'Sedan': ['Altima', 'Sentra', 'Versa', 'Maxima'],
+                'SUV': ['Rogue', 'Pathfinder', 'Murano', 'Armada', 'Kicks', 'Rogue Sport'],
+                'Pickup Truck': ['Frontier', 'Titan'],
+                'Sports Car': ['Z', 'GT-R']
+            },
+            'Jeep': {
+                'SUV': ['Grand Cherokee', 'Wrangler', 'Cherokee', 'Compass', 'Renegade', 'Wagoneer', 'Grand Wagoneer'],
+                'Pickup Truck': ['Gladiator']
+            },
+            'BMW': {
+                'Sedan': ['3 Series', '5 Series', '7 Series', '2 Series', '8 Series'],
+                'SUV': ['X3', 'X5', 'X7', 'X1', 'X4', 'X6'],
+                'Sports Car': ['Z4', 'i8', 'M2', 'M3', 'M4', 'M5', 'M8']
+            },
+            'Mercedes-Benz': {
+                'Sedan': ['C-Class', 'E-Class', 'S-Class', 'A-Class', 'CLA', 'CLS'],
+                'SUV': ['GLC', 'GLE', 'GLS', 'GLA', 'GLB', 'EQB', 'EQE SUV'],
+                'Sports Car': ['AMG GT', 'SL-Class']
+            },
+            'Audi': {
+                'Sedan': ['A3', 'A4', 'A5', 'A6', 'A7', 'A8'],
+                'SUV': ['Q3', 'Q5', 'Q7', 'Q8', 'e-tron', 'Q4 e-tron'],
+                'Sports Car': ['TT', 'R8']
+            },
+            'Lexus': {
+                'Sedan': ['ES', 'IS', 'LS', 'GS'],
+                'SUV': ['RX', 'NX', 'GX', 'LX', 'UX'],
+                'Sports Car': ['LC', 'RC']
+            },
+            'Hyundai': {
+                'Sedan': ['Elantra', 'Sonata', 'Accent', 'Ioniq 6'],
+                'SUV': ['Tucson', 'Santa Fe', 'Kona', 'Palisade', 'Venue', 'Ioniq 5'],
+                'Van': ['Palisade']
+            },
+            'Kia': {
+                'Sedan': ['Forte', 'K5', 'Rio', 'Stinger', 'Cadenza'],
+                'SUV': ['Sorento', 'Sportage', 'Telluride', 'Soul', 'Seltos', 'EV6', 'Niro'],
+                'Minivan': ['Carnival']
+            },
+            'Subaru': {
+                'Sedan': ['Impreza', 'Legacy', 'WRX'],
+                'SUV': ['Outback', 'Forester', 'Crosstrek', 'Ascent'],
+                'Sports Car': ['BRZ']
+            },
+            'Volkswagen': {
+                'Sedan': ['Jetta', 'Passat', 'Arteon', 'ID.7'],
+                'SUV': ['Tiguan', 'Atlas', 'Taos', 'ID.4'],
+                'Van': ['Atlas Cross Sport']
+            },
+            'Mazda': {
+                'Sedan': ['Mazda3', 'Mazda6'],
+                'SUV': ['CX-5', 'CX-9', 'CX-30', 'CX-50', 'CX-90'],
+                'Sports Car': ['MX-5 Miata']
+            },
+            'Volvo': {
+                'Sedan': ['S60', 'S90'],
+                'SUV': ['XC40', 'XC60', 'XC90'],
+                'Wagon': ['V60', 'V90']
+            },
+            'Porsche': {
+                'Sedan': ['Panamera', 'Taycan'],
+                'SUV': ['Cayenne', 'Macan'],
+                'Sports Car': ['911', '718 Boxster', '718 Cayman']
+            },
+            'Tesla': {
+                'Sedan': ['Model 3', 'Model S'],
+                'SUV': ['Model Y', 'Model X'],
+                'Truck': ['Cybertruck']
+            },
+            'Acura': {
+                'Sedan': ['ILX', 'TLX', 'RLX'],
+                'SUV': ['RDX', 'MDX']
+            },
+            'Infiniti': {
+                'Sedan': ['Q50', 'Q60', 'Q70'],
+                'SUV': ['QX50', 'QX55', 'QX60', 'QX80']
+            },
+            'Cadillac': {
+                'Sedan': ['CT4', 'CT5', 'CT6'],
+                'SUV': ['XT4', 'XT5', 'XT6', 'Escalade'],
+                'Sports Car': ['CT5-V Blackwing', 'CT4-V Blackwing']
+            },
+            'Lincoln': {
+                'Sedan': ['Continental', 'MKZ'],
+                'SUV': ['Corsair', 'Nautilus', 'Aviator', 'Navigator']
+            },
+            'Buick': {
+                'Sedan': ['Regal'],
+                'SUV': ['Encore', 'Envision', 'Enclave']
+            },
+            'Chrysler': {
+                'Sedan': ['300'],
+                'Minivan': ['Pacifica'],
+                'SUV': ['Pacifica Hybrid']
+            },
+            'Dodge': {
+                'Sedan': ['Charger', 'Challenger'],
+                'SUV': ['Durango'],
+                'Minivan': ['Grand Caravan']
+            },
+            'Ram': {
+                'Pickup Truck': ['1500', '2500', '3500'],
+                'Van': ['ProMaster']
+            },
+            'GMC': {
+                'SUV': ['Terrain', 'Acadia', 'Yukon'],
+                'Pickup Truck': ['Canyon', 'Sierra 1500', 'Sierra 2500HD', 'Sierra 3500HD']
+            },
+            'Jaguar': {
+                'Sedan': ['XE', 'XF', 'XJ'],
+                'SUV': ['E-Pace', 'F-Pace', 'I-Pace']
+            },
+            'Land Rover': {
+                'SUV': ['Range Rover Evoque', 'Range Rover Velar', 'Range Rover Sport', 'Range Rover', 'Discovery', 'Defender']
+            },
+            'Mitsubishi': {
+                'Sedan': ['Mirage'],
+                'SUV': ['Outlander', 'Eclipse Cross', 'Outlander Sport']
+            },
+            'Mini': {
+                'Hatchback': ['Hardtop 2 Door', 'Hardtop 4 Door', 'Clubman'],
+                'SUV': ['Countryman'],
+                'Convertible': ['Convertible']
+            },
+            'Fiat': {
+                'Hatchback': ['500'],
+                'SUV': ['500X']
+            },
+            'Alfa Romeo': {
+                'Sedan': ['Giulia'],
+                'SUV': ['Stelvio', 'Tonale']
+            },
+            'Genesis': {
+                'Sedan': ['G70', 'G80', 'G90'],
+                'SUV': ['GV70', 'GV80', 'GV60']
+            },
+            'Maserati': {
+                'Sedan': ['Ghibli', 'Quattroporte'],
+                'SUV': ['Levante', 'Grecale'],
+                'Sports Car': ['MC20']
+            },
+            'Bentley': {
+                'Sedan': ['Flying Spur'],
+                'SUV': ['Bentayga'],
+                'Coupe': ['Continental GT']
+            },
+            'Ferrari': {
+                'Sports Car': ['Roma', 'Portofino M', 'F8 Tributo', 'SF90 Stradale', '296 GTB', '812 Superfast']
+            },
+            'Lamborghini': {
+                'SUV': ['Urus'],
+                'Sports Car': ['Huracán', 'Aventador', 'Revuelto']
+            },
+            'Rolls-Royce': {
+                'Sedan': ['Ghost', 'Phantom'],
+                'SUV': ['Cullinan'],
+                'Coupe': ['Wraith', 'Dawn']
+            },
+            'Aston Martin': {
+                'Sports Car': ['Vantage', 'DB11', 'DBS Superleggera', 'Valhalla'],
+                'SUV': ['DBX']
+            },
+            'McLaren': {
+                'Sports Car': ['Artura', '720S', '765LT', 'Elva', 'Senna']
+            },
+            'Bugatti': {
+                'Sports Car': ['Chiron', 'Divo', 'La Voiture Noire']
+            }
+        };
+        
+        let pickupData = null;
+        let deliveryData = null;
+        let routeMap = null;
+
+        // Function to validate ZIP code range
+        function isValidZipCode(zipCode) {
+            const zipNum = parseInt(zipCode);
+            return zipNum >= 210 && zipNum <= 99950;
+        }
+        
+        // Function to get location data for a ZIP code
+        async function getLocationData(zipCode) {
+            // First check our database
+            if (zipCodeDatabase[zipCode]) {
+                return zipCodeDatabase[zipCode];
+            }
+            
+            // If not in database, use a geocoding service
+            try {
+                const response = await fetch(`https://api.zippopotam.us/us/${zipCode}`);
+                
+                if (!response.ok) {
+                    throw new Error('ZIP code not found');
+                }
+                
+                const data = await response.json();
+                
+                if (data.places && data.places.length > 0) {
+                    const place = data.places[0];
+                    return {
+                        city: place['place name'],
+                        state: place['state'],
+                        stateAbbr: place['state abbreviation'],
+                        lat: parseFloat(place.latitude),
+                        lng: parseFloat(place.longitude)
+                    };
+                } else {
+                    throw new Error('Location data not available');
+                }
+            } catch (error) {
+                // Fallback for demonstration
+                return getFallbackLocation(zipCode);
+            }
+        }
+        
+        // Fallback function to generate location data for demonstration
+        function getFallbackLocation(zipCode) {
+            // Convert ZIP to a number for deterministic but random-looking coordinates
+            const zipNum = parseInt(zipCode);
+            const seed = zipNum * 12345;
+            
+            // US bounding box approximately
+            const minLat = 24.0;
+            const maxLat = 50.0;
+            const minLng = -125.0;
+            const maxLng = -66.0;
+            
+            // Generate deterministic but "random" coordinates based on ZIP
+            const lat = minLat + (seed % 1000) / 1000 * (maxLat - minLat);
+            const lng = minLng + ((seed * 7) % 1000) / 1000 * (maxLng - minLng);
+            
+            // List of major cities for fallback
+            const cities = [
+                { city: 'New York', state: 'New York', stateAbbr: 'NY' },
+                { city: 'Los Angeles', state: 'California', stateAbbr: 'CA' },
+                { city: 'Chicago', state: 'Illinois', stateAbbr: 'IL' },
+                { city: 'Houston', state: 'Texas', stateAbbr: 'TX' },
+                { city: 'Phoenix', state: 'Arizona', stateAbbr: 'AZ' }
+            ];
+            
+            const cityIndex = zipNum % cities.length;
+            
+            return {
+                city: cities[cityIndex].city,
+                state: cities[cityIndex].state,
+                stateAbbr: cities[cityIndex].stateAbbr,
+                lat: lat,
+                lng: lng
+            };
+        }
+
+        // Function to update ZIP code preview
+        async function updateZipPreview(zipCode, previewElement) {
+            if (!zipCode || !/^\d{5}$/.test(zipCode)) {
+                previewElement.textContent = '';
+                return;
+            }
+            
+            if (!isValidZipCode(zipCode)) {
+                previewElement.textContent = 'Invalid ZIP code';
+                previewElement.style.color = '#dc3545';
+                return;
+            }
+            
+            previewElement.textContent = 'Loading...';
+            previewElement.style.color = '#666';
+            
+            try {
+                const locationData = await getLocationData(zipCode);
+                previewElement.textContent = `${locationData.city}, ${locationData.stateAbbr}`;
+                previewElement.style.color = '#28a745';
+            } catch (error) {
+                previewElement.textContent = 'Location not found';
+                previewElement.style.color = '#dc3545';
+            }
+        }
+
+        // Function to update vehicle models based on selected maker
+        function updateVehicleModels() {
+            const maker = document.getElementById('vehicleMaker').value;
+            const modelSelect = document.getElementById('vehicleModel');
+            const manualInput = document.getElementById('vehicleModelManual');
+            
+            // Clear existing options
+            modelSelect.innerHTML = '';
+            
+            if (maker === 'Other') {
+                // Show manual input for model
+                modelSelect.disabled = true;
+                modelSelect.innerHTML = '<option value="">Other Selected</option>';
+                manualInput.classList.add('show');
+            } else if (maker && vehicleModels[maker]) {
+                // Enable the select and add options
+                modelSelect.disabled = false;
+                modelSelect.innerHTML = '<option value="">Select Model</option>';
+                manualInput.classList.remove('show');
+                
+                // Add models by category
+                for (const [category, models] of Object.entries(vehicleModels[maker])) {
+                    const optgroup = document.createElement('optgroup');
+                    optgroup.label = category;
+                    
+                    models.forEach(model => {
+                        const option = document.createElement('option');
+                        option.value = model;
+                        option.textContent = model;
+                        option.setAttribute('data-category', category);
+                        optgroup.appendChild(option);
+                    });
+                    
+                    modelSelect.appendChild(optgroup);
+                }
+            } else {
+                // Disable and show placeholder
+                modelSelect.disabled = true;
+                modelSelect.innerHTML = '<option value="">Select Maker First</option>';
+                manualInput.classList.remove('show');
+            }
+        }
+
+        // Function to handle vehicle year selection
+        function handleVehicleYearChange() {
+            const yearSelect = document.getElementById('vehicleYear');
+            const manualInput = document.getElementById('vehicleYearManual');
+            
+            if (yearSelect.value === 'manual') {
+                manualInput.classList.add('show');
+            } else {
+                manualInput.classList.remove('show');
+            }
+        }
+
+        // Function to determine vehicle type
+        function getVehicleType(vehicleModel) {
+            if (!vehicleModel) return 'Sedan';
+            
+            // Find the category for the selected model
+            const maker = document.getElementById('vehicleMaker').value;
+            if (maker && vehicleModels[maker]) {
+                for (const [category, models] of Object.entries(vehicleModels[maker])) {
+                    if (models.includes(vehicleModel)) {
+                        return category;
+                    }
+                }
+            }
+            
+            // Fallback for manual input or other cases
+            const modelLower = vehicleModel.toLowerCase();
+            if (modelLower.includes('tacoma') || modelLower.includes('tundra') || 
+                modelLower.includes('f-150') || modelLower.includes('silverado') ||
+                modelLower.includes('ranger') || modelLower.includes('frontier') ||
+                modelLower.includes('titan') || modelLower.includes('gladiator')) {
+                return 'Pickup Truck';
+            } else if (modelLower.includes('rav4') || modelLower.includes('highlander') ||
+                      modelLower.includes('explorer') || modelLower.includes('cr-v') ||
+                      modelLower.includes('rogue') || modelLower.includes('grand cherokee') ||
+                      modelLower.includes('x3') || modelLower.includes('x5')) {
+                return 'SUV';
+            } else {
+                return 'Sedan';
+            }
+        }
+
+        // Event listeners for calculator
+        document.getElementById('pickupZip').addEventListener('input', function(e) {
+            updateZipPreview(e.target.value, document.getElementById('pickupPreview'));
+        });
+        
+        document.getElementById('deliveryZip').addEventListener('input', function(e) {
+            updateZipPreview(e.target.value, document.getElementById('deliveryPreview'));
+        });
+
+        document.getElementById('vehicleMaker').addEventListener('change', updateVehicleModels);
+        document.getElementById('vehicleYear').addEventListener('change', handleVehicleYearChange);
+        
+        async function getQuotes() {
+            const fullName = document.getElementById('fullName').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const pickupZip = document.getElementById('pickupZip').value.trim();
+            const deliveryZip = document.getElementById('deliveryZip').value.trim();
+            const vehicleMaker = document.getElementById('vehicleMaker').value;
+            
+            // Get vehicle model - either from dropdown or manual input
+            let vehicleModel;
+            if (vehicleMaker === 'Other') {
+                vehicleModel = document.getElementById('vehicleModelInput').value.trim();
+            } else {
+                vehicleModel = document.getElementById('vehicleModel').value;
+            }
+            
+            // Get vehicle year - either from dropdown or manual input
+            let vehicleYear;
+            if (document.getElementById('vehicleYear').value === 'manual') {
+                vehicleYear = document.getElementById('vehicleYearInput').value.trim();
+            } else {
+                vehicleYear = document.getElementById('vehicleYear').value;
+            }
+            
+            const carCondition = document.getElementById('carCondition').value;
+
+            // Validate all required fields
+            if (!fullName || !phone || !email || !pickupZip || !deliveryZip || !vehicleMaker || !vehicleModel || !vehicleYear || !carCondition) {
+                showError('Please fill in all required fields');
+                return;
+            }
+            
+            if (!/^\d{5}$/.test(pickupZip) || !/^\d{5}$/.test(deliveryZip)) {
+                showError('Please enter valid 5-digit ZIP codes');
+                return;
+            }
+            
+            if (!isValidZipCode(pickupZip) || !isValidZipCode(deliveryZip)) {
+                showError('Please enter valid US ZIP codes');
+                return;
+            }
+            
+            // Hide customer info form
+            document.getElementById('customerInfo').classList.add('hidden');
+            
+            // Show loading for both locations
+            showResult('pickup', '<div class="loading"></div> Searching...', 'loading');
+            showResult('delivery', '<div class="loading"></div> Searching...', 'loading');
+            
+            // Clear any previous error
+            clearError();
+            
+            // Disable search button during search
+            document.getElementById('searchBtn').disabled = true;
+            document.getElementById('searchBtn').innerHTML = '<div class="loading"></div> Calculating...';
+            
+            try {
+                // Get both locations simultaneously
+                const [pickupLocation, deliveryLocation] = await Promise.all([
+                    getLocationData(pickupZip),
+                    getLocationData(deliveryZip)
+                ]);
+                
+                // Store data for distance calculation
+                pickupData = {
+                    zip: pickupZip,
+                    city: pickupLocation.city,
+                    state: pickupLocation.state,
+                    stateAbbr: pickupLocation.stateAbbr,
+                    latitude: pickupLocation.lat,
+                    longitude: pickupLocation.lng
+                };
+                
+                deliveryData = {
+                    zip: deliveryZip,
+                    city: deliveryLocation.city,
+                    state: deliveryLocation.state,
+                    stateAbbr: deliveryLocation.stateAbbr,
+                    latitude: deliveryLocation.lat,
+                    longitude: deliveryLocation.lng
+                };
+                
+                // Show results
+                showLocationResult('pickup', pickupData);
+                showLocationResult('delivery', deliveryData);
+                
+                // Calculate distance and show quote
+                calculateHaulingCosts(vehicleModel, carCondition);
+                
+            } catch (error) {
+                showError(`Error: ${error.message}`);
+                showResult('pickup', 'Error loading location', 'error');
+                showResult('delivery', 'Error loading location', 'error');
+            } finally {
+                // Re-enable search button
+                document.getElementById('searchBtn').disabled = false;
+                document.getElementById('searchBtn').innerHTML = 'Get Quotes';
+            }
+        }
+        
+        function showLocationResult(type, locationData) {
+            const resultHTML = `
+                <div class="location-info">
+                    <div class="info-item">
+                        <strong>ZIP Code</strong>
+                        ${locationData.zip}
+                    </div>
+                    <div class="info-item">
+                        <strong>City</strong>
+                        ${locationData.city}
+                    </div>
+                    <div class="info-item">
+                        <strong>State</strong>
+                        ${locationData.state}
+                    </div>
+                    <div class="info-item">
+                        <strong>Abbreviation</strong>
+                        ${locationData.stateAbbr}
+                    </div>
+                </div>
+            `;
+            
+            const resultDiv = document.getElementById(`${type}Result`);
+            resultDiv.innerHTML = resultHTML;
+            resultDiv.className = '';
+        }
+        
+        function showResult(type, message, resultType) {
+            const resultDiv = document.getElementById(`${type}Result`);
+            if (resultType === 'loading') {
+                resultDiv.innerHTML = `<div style="text-align: center; color: var(--primary);">${message}</div>`;
+                resultDiv.className = 'empty-state';
+            } else if (resultType === 'error') {
+                resultDiv.innerHTML = `<div style="color: #dc3545; text-align: center;">${message}</div>`;
+                resultDiv.className = 'empty-state';
+            }
+        }
+        
+        function showError(message) {
+            // Create or update error message element
+            let errorElement = document.getElementById('errorMessage');
+            if (!errorElement) {
+                errorElement = document.createElement('div');
+                errorElement.id = 'errorMessage';
+                errorElement.className = 'error-message';
+                document.querySelector('.calculator-content').appendChild(errorElement);
+            }
+            errorElement.textContent = message;
+        }
+        
+        function clearError() {
+            const errorElement = document.getElementById('errorMessage');
+            if (errorElement) {
+                errorElement.remove();
+            }
+        }
+        
+        function calculateHaulingCosts(vehicleModel, carCondition) {
+            if (!pickupData || !deliveryData) return;
+            
+            // Show quote section
+            document.getElementById('quoteSection').style.display = 'block';
+            
+            // Initialize Leaflet map
+            initRouteMap();
+            
+            // Calculate straight-line distance
+            const straightDistance = calculateHaversineDistance(
+                pickupData.latitude, pickupData.longitude,
+                deliveryData.latitude, deliveryData.longitude
+            );
+            
+            // Convert to miles and add road factor
+            const roadDistance = (straightDistance * 0.621371 * 1.3).toFixed(0);
+            
+            // Estimate transit time
+            const transitDays = Math.max(1, Math.ceil(roadDistance / 450));
+            let transitTimeText = `${transitDays} day${transitDays > 1 ? 's' : ''}`;
+            
+            document.getElementById('drivingDistance').textContent = `${roadDistance} mi`;
+            document.getElementById('travelTime').textContent = transitTimeText;
+            
+            // Calculate car hauling costs
+            const baseRate = calculateBaseHaulingRate(parseFloat(roadDistance));
+            
+            // Apply surcharges based on condition
+            let nonRunningSurcharge = 0;
+            let vehicleType = getVehicleType(vehicleModel);
+            let surchargeMessage = '';
+            let forkliftMessage = '';
+            
+            if (carCondition === 'nonRunningSteeringBrakes') {
+                if (vehicleType === 'Pickup Truck') {
+                    nonRunningSurcharge = 100;
+                    surchargeMessage = `Non-running pickup truck surcharge: +$${nonRunningSurcharge}`;
+                } else if (vehicleType === 'SUV') {
+                    nonRunningSurcharge = 75;
+                    surchargeMessage = `Non-running SUV surcharge: +$${nonRunningSurcharge}`;
+                } else {
+                    nonRunningSurcharge = 50;
+                    surchargeMessage = `Non-running sedan surcharge: +$${nonRunningSurcharge}`;
+                }
+            } else if (carCondition === 'nonRunning') {
+                forkliftMessage = 'Additional charges will be applied as Fork Lift is required';
+            }
+            
+            const adjustedBaseRate = baseRate + nonRunningSurcharge;
+            const rateRange = calculateRateRange(adjustedBaseRate);
+            const suvRate = calculateSuvRate(adjustedBaseRate);
+            const luxuryRate = calculateLuxuryRate(adjustedBaseRate);
+            
+            // Display the calculated rates
+            document.getElementById('haulingCost').textContent = `$${adjustedBaseRate.toFixed(0)}`;
+            document.getElementById('rateRange').textContent = `$${rateRange.min}-$${rateRange.max}`;
+            document.getElementById('suvCost').textContent = `$${suvRate.min}-$${suvRate.max}`;
+            document.getElementById('luxuryCost').textContent = `$${luxuryRate.min}-$${luxuryRate.max}`;
+            
+            // Show vehicle type indicator
+            const vehicleTypeIndicator = document.getElementById('vehicleTypeIndicator');
+            vehicleTypeIndicator.textContent = `Vehicle Type: ${vehicleType}`;
+            vehicleTypeIndicator.style.display = 'block';
+            
+            // Show surcharge notice if applicable
+            const surchargeNotice = document.getElementById('surchargeNotice');
+            if (nonRunningSurcharge > 0) {
+                surchargeNotice.textContent = surchargeMessage;
+                surchargeNotice.style.display = 'block';
+            } else {
+                surchargeNotice.style.display = 'none';
+            }
+            
+            // Show forklift notice if applicable
+            const forkliftNotice = document.getElementById('forkliftNotice');
+            if (forkliftMessage) {
+                forkliftNotice.textContent = forkliftMessage;
+                forkliftNotice.style.display = 'block';
+            } else {
+                forkliftNotice.style.display = 'none';
+            }
+            
+            // Scroll to show the quote section
+            document.getElementById('quoteSection').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function initRouteMap() {
+            const mapElement = document.getElementById('routeMap');
+            
+            // Clear previous map
+            if (routeMap) {
+                routeMap.remove();
+            }
+            mapElement.innerHTML = '';
+            
+            // Calculate center point
+            const centerLat = (pickupData.latitude + deliveryData.latitude) / 2;
+            const centerLng = (pickupData.longitude + deliveryData.longitude) / 2;
+            
+            // Initialize map
+            routeMap = L.map('routeMap').setView([centerLat, centerLng], 4);
+            
+            // Add tile layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors',
+                maxZoom: 18
+            }).addTo(routeMap);
+            
+            // Add markers
+            const pickupIcon = L.divIcon({
+                html: '🏁',
+                className: 'custom-icon',
+                iconSize: [28, 28]
+            });
+            
+            const deliveryIcon = L.divIcon({
+                html: '🚗',
+                className: 'custom-icon', 
+                iconSize: [28, 28]
+            });
+            
+            L.marker([pickupData.latitude, pickupData.longitude], {icon: pickupIcon})
+                .addTo(routeMap)
+                .bindPopup(`<b>Pickup</b><br>${pickupData.city}, ${pickupData.stateAbbr}`);
+                
+            L.marker([deliveryData.latitude, deliveryData.longitude], {icon: deliveryIcon})
+                .addTo(routeMap)
+                .bindPopup(`<b>Delivery</b><br>${deliveryData.city}, ${deliveryData.stateAbbr}`);
+            
+            // Add route line
+            const routeLine = L.polyline([
+                [pickupData.latitude, pickupData.longitude],
+                [deliveryData.latitude, deliveryData.longitude]
+            ], {
+                color: '#0D3B66',
+                weight: 4,
+                opacity: 0.7,
+                dashArray: '5, 10'
+            }).addTo(routeMap);
+            
+            // Fit map to show both points
+            routeMap.fitBounds(routeLine.getBounds());
+        }
+        
+        // Market-based pricing algorithm
+        function calculateBaseHaulingRate(distanceMiles) {
+            let baseRate;
+            
+            if (distanceMiles <= 100) {
+                baseRate = 1.50 * distanceMiles;
+            } else if (distanceMiles <= 300) {
+                baseRate = 150 + (distanceMiles - 100) * 0.90;
+            } else if (distanceMiles <= 600) {
+                baseRate = 330 + (distanceMiles - 300) * 0.75;
+            } else if (distanceMiles <= 1000) {
+                baseRate = 555 + (distanceMiles - 600) * 0.65;
+            } else if (distanceMiles <= 1500) {
+                baseRate = 815 + (distanceMiles - 1000) * 0.60;
+            } else if (distanceMiles <= 2000) {
+                baseRate = 1115 + (distanceMiles - 1500) * 0.55;
+            } else {
+                baseRate = 1390 + (distanceMiles - 2000) * 0.50;
+            }
+            
+            // Apply seasonal adjustment
+            const month = new Date().getMonth();
+            let seasonalMultiplier = 1.0;
+            
+            if (month >= 4 && month <= 8) {
+                seasonalMultiplier = 1.15;
+            } else if (month >= 11 || month <= 1) {
+                seasonalMultiplier = 0.90;
+            }
+            
+            return baseRate * seasonalMultiplier;
+        }
+        
+        function calculateRateRange(baseRate) {
+            const minRate = baseRate * 0.85;
+            const maxRate = baseRate * 1.25;
+            
+            return {
+                min: Math.round(minRate),
+                max: Math.round(maxRate)
+            };
+        }
+        
+        function calculateSuvRate(baseRate) {
+            const minRate = baseRate * 1.15;
+            const maxRate = baseRate * 1.25;
+            
+            return {
+                min: Math.round(minRate),
+                max: Math.round(maxRate)
+            };
+        }
+        
+        function calculateLuxuryRate(baseRate) {
+            const minRate = baseRate * 1.30;
+            const maxRate = baseRate * 1.50;
+            
+            return {
+                min: Math.round(minRate),
+                max: Math.round(maxRate)
+            };
+        }
+        
+        function calculateHaversineDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = 
+                Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+        
+        function clearAll() {
+            // Clear all input fields
+            document.getElementById('fullName').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('pickupZip').value = '';
+            document.getElementById('deliveryZip').value = '';
+            document.getElementById('vehicleMaker').value = '';
+            document.getElementById('vehicleModel').value = '';
+            document.getElementById('vehicleModelInput').value = '';
+            document.getElementById('vehicleYear').value = '';
+            document.getElementById('vehicleYearInput').value = '';
+            document.getElementById('carCondition').value = '';
+            
+            // Clear previews
+            document.getElementById('pickupPreview').textContent = '';
+            document.getElementById('deliveryPreview').textContent = '';
+            
+            // Reset vehicle model dropdown
+            updateVehicleModels();
+            
+            // Hide manual inputs
+            document.getElementById('vehicleModelManual').classList.remove('show');
+            document.getElementById('vehicleYearManual').classList.remove('show');
+            
+            // Show customer info form
+            document.getElementById('customerInfo').classList.remove('hidden');
+            
+            // Clear results
+            document.getElementById('pickupResult').innerHTML = 'Enter ZIP code';
+            document.getElementById('pickupResult').className = 'empty-state';
+            
+            document.getElementById('deliveryResult').innerHTML = 'Enter ZIP code';
+            document.getElementById('deliveryResult').className = 'empty-state';
+            
+            // Hide quote section and clear map
+            document.getElementById('quoteSection').style.display = 'none';
+            if (routeMap) {
+                routeMap.remove();
+                routeMap = null;
+            }
+            
+            // Clear data
+            pickupData = null;
+            deliveryData = null;
+            
+            // Clear any errors
+            clearError();
+            
+            // Enable search button
+            document.getElementById('searchBtn').disabled = false;
+        }
+        
+        // Enter key support for form submission
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                getQuotes();
+            }
+        });
+
+        // Initialize the form
+        updateVehicleModels();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs | The Wize Auto Transport</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<!-- Simple Protection Script -->
+<script>
+// Basic Right-Click Protection
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+
+// Developer Tools Protection  
+document.addEventListener('keydown', function(e) {
+    // Block F12
+    if (e.key === 'F12') {
+        e.preventDefault();
+        return false;
+    }
+    // Block Ctrl+Shift+I
+    if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+        e.preventDefault();
+        return false;
+    }
+    // Block Ctrl+U
+    if (e.ctrlKey && e.key === 'u') {
+        e.preventDefault();
+        return false;
+    }
+});
+
+// Console Warning
+console.log('%c🔒 STOP!', 'color: red; font-size: 30px; font-weight: bold;');
+console.log('%cThis website is protected by copyright.', 'color: orange; font-size: 16px;');
+console.log('%cThe Wize Auto Transport - All rights reserved', 'color: orange; font-size: 14px;');
+</script>
+<style>
+        /* 🔥 BOOK NOW BUTTON STYLES */
+        .nav-book-now {
+            background-color: var(--primary);
+            color: white !important;
+            padding: 0.4rem 1.5rem !important;
+            border-radius: 7px;
+            margin-left: 0.1rem;
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+        }
+
+        .nav-book-now:hover {
+            background-color: var(--secondary);
+            color: var(--dark) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(248, 181, 0, 0.3);
+        }
+
+        /* Mobile menu book now button */
+        @media (max-width: 768px) {
+            .nav-book-now {
+                margin: 1rem auto;
+                display: block;
+                width: 80%;
+                text-align: center;
+            }
+        }
+    </style>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1>The <span>Wize</span> Auto Transport</h1>
+            </div>
+            <nav>
+                <ul id="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="faq.html" class="active">FAQs</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                      <!-- 🔥 UPDATED BOOK NOW BUTTON -->
+                    <li><a href="booking-form.html" class="nav-book-now" target="_blank">Book Now</a></li>
+                </ul>
+                <button class="mobile-menu-btn" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Frequently Asked Questions</h1>
+            <p>Find answers to common questions about our auto transport services</p>
+        </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <section class="faq-page">
+        <div class="container">
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How much does car shipping cost?
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Pricing depends on distance, route, vehicle size, and shipping type. We offer competitive rates with zero hidden charges. Get a free quote for accurate pricing based on your specific needs.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is my vehicle insured during transport?
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely. Every shipment includes full insurance coverage for your peace of mind. Our carriers are required to carry adequate insurance, and we can provide proof of insurance upon request.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I put personal items in my car?
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>A small amount (under 100 lbs) is typically allowed, but personal items are not insured — we recommend keeping valuables separate. Please note that carriers may refuse vehicles with excessive personal belongings.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do I need to pay upfront?
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No. You only pay once your carrier has been assigned and confirmed. We believe in transparency and only charge when we have a verified carrier ready to transport your vehicle.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How long does delivery take?
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Transit times vary by route — short-distance moves take 1–3 days, while cross-country shipments may take 5–9 days. Expedited shipping options are available for time-sensitive moves.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Will my vehicle be tracked?
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes. Our support team provides updates throughout the entire transport process. Many of our carriers also offer GPS tracking so you can monitor your vehicle's progress in real-time.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What's the difference between open and enclosed transport?
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Open transport is the standard method where vehicles are carried on an open trailer. It's cost-effective and suitable for most vehicles. Enclosed transport provides full protection from weather and road debris, making it ideal for luxury, classic, or high-value vehicles.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do you transport non-running vehicles?
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we transport non-running vehicles. There may be an additional fee for winching services to load the vehicle onto the carrier. Please inform us if your vehicle is not operational when requesting a quote.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How far in advance should I book my shipment?
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We recommend booking at least 1-2 weeks in advance for the best carrier availability and pricing. For peak seasons (summer, holidays), booking 3-4 weeks ahead is advisable.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What preparation is needed before shipping my vehicle?
+                        <i class="fas fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Before shipping, please: wash your vehicle for easier inspection, take photos for documentation, remove personal items, ensure the gas tank is no more than 1/4 full, disable alarms, and provide keys to the carrier.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Still Have Questions -->
+            <div class="questions-cta">
+                <h2>Still Have Questions?</h2>
+                <p>Can't find the answer you're looking for? Our team is here to help.</p>
+                <a href="contact.html" class="btn btn-primary">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>The Wize Auto Transport</h3>
+                    <p>Your trusted partner in nationwide auto logistics. We make vehicle shipping simple, reliable, and affordable.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="faq.html">FAQs</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+               <div class="footer-col">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="services.html#auto-transport">Auto Transport</a></li>
+                    <li><a href="services.html#freight-commercial">Freight & Commercial</a></li>
+                    <li><a href="services.html#motorcycle-specialty">Motorcycle Transport</a></li>
+                    <li><a href="services.html#heavy-equipment">Heavy Equipment</a></li>
+                </ul>
+            </div>
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Insurance Info</a></li>
+                        <li><a href="#">Carrier Agreement</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 The Wize Auto Transport. All rights reserved.</p>
+                <p>"Your trusted partner in nationwide auto logistics."</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

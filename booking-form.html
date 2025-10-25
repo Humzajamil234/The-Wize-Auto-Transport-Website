@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Form - The Wize Auto Transport</title>
+    <!-- Include jsPDF library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        /* PDF-friendly styling */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                font-size: 12pt;
+            }
+            
+            .no-print {
+                display: none !important;
+            }
+            
+            .page-break {
+                page-break-before: always;
+            }
+            
+            .container {
+                width: 100%;
+                max-width: none;
+                padding: 0;
+            }
+            
+            .form-container {
+                box-shadow: none;
+                border: 1px solid #000;
+                padding: 15px;
+            }
+            
+            .btn-submit, .btn-add-vehicle {
+                display: none;
+            }
+            
+            .auth-modal {
+                display: none !important;
+            }
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.4;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 8.5in;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        header {
+            background-color: #1a365d;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #d4af37;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 24pt;
+            font-weight: bold;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 11pt;
+            margin-top: 10px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .order-info {
+            background-color: #2d3748;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 2px solid #d4af37;
+        }
+        
+        .order-details {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        .order-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .order-label {
+            font-size: 10pt;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+        
+        .order-value {
+            font-size: 14pt;
+            font-weight: bold;
+        }
+        
+        .form-container {
+            padding: 25px;
+        }
+        
+        .form-section {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .section-title {
+            font-size: 16pt;
+            color: #1a365d;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #d4af37;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            flex: 1 1 45%;
+            margin-bottom: 12px;
+        }
+        
+        .form-group-full {
+            flex: 1 1 100%;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 11pt;
+        }
+        
+        .form-group input, 
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            font-size: 11pt;
+        }
+        
+        .form-group input:focus, 
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.5);
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 5px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .radio-option input {
+            width: auto;
+        }
+        
+        .btn-submit, .btn-add-vehicle, .btn-final-submit {
+            background-color: #d4af37;
+            color: #1a365d;
+            border: none;
+            padding: 12px 25px;
+            font-size: 12pt;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+            width: 200px;
+        }
+        
+        .btn-add-vehicle {
+            background-color: #b8941f;
+            color: white;
+            width: auto;
+            margin: 10px 0;
+        }
+        
+        .btn-final-submit {
+            background-color: #38a169;
+            color: white;
+        }
+        
+        .btn-submit:hover, .btn-final-submit:hover {
+            background-color: #b8941f;
+        }
+        
+        .btn-add-vehicle:hover {
+            background-color: #9c7c1a;
+        }
+        
+        .print-instructions {
+            background-color: #e2e8f0;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 10pt;
+            text-align: center;
+        }
+        
+        footer {
+            background-color: #1a365d;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 10pt;
+            margin-top: 20px;
+        }
+        
+        .footer-contact {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .disclaimer {
+            margin-top: 10px;
+            font-size: 9pt;
+            color: #cbd5e0;
+        }
+        
+        .vehicle-section {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 4px solid #d4af37;
+        }
+        
+        .vehicle-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .remove-vehicle {
+            background-color: #e53e3e;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 10pt;
+        }
+        
+        .remove-vehicle:hover {
+            background-color: #c53030;
+        }
+        
+        .conditional-field {
+            display: none;
+        }
+        
+        .conditional-field.show {
+            display: block;
+        }
+        
+        .narrow-field {
+            flex: 1 1 30%;
+        }
+        
+        /* Auth Modal Styles */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .auth-modal-content {
+            background-color: white;
+            margin: 40px auto;
+            padding: 30px;
+            width: 90%;
+            max-width: 8.5in;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .auth-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 10px;
+        }
+        
+        .auth-modal-title {
+            font-size: 20pt;
+            color: #1a365d;
+            margin: 0;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24pt;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .auth-page {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+        
+        .auth-page h2 {
+            color: #1a365d;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #d4af37;
+            padding-bottom: 5px;
+        }
+        
+        .signature-line {
+            margin-top: 30px;
+            border-top: 1px solid #333;
+            padding-top: 5px;
+        }
+        
+        .card-options {
+            display: flex;
+            gap: 15px;
+            margin: 10px 0;
+        }
+        
+        .card-option {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #d4af37;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+            margin: 0 auto 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>The Wize Auto Transport</h1>
+            </div>
+            <p>Professional Vehicle Transportation Services</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📞</span>
+                    <span>(307) 453-0502</span>
+                </div>
+                <div class="contact-item">
+                    <span>✉️</span>
+                    <span>support@thewizeautotransport.com</span>
+                </div>
+                <div class="contact-item">
+                    <span>🌐</span>
+                    <span>www.thewizeautotransport.com</span>
+                </div>
+            </div>
+        </header>
+        
+        <div class="order-info">
+            <h3>Booking Details</h3>
+            <div class="order-details">
+                <div class="order-item">
+                    <div class="order-label">ORDER NUMBER</div>
+                    <div class="order-value" id="orderNumber">W00000</div>
+                </div>
+                <div class="order-item">
+                    <div class="order-label">QUOTE AMOUNT</div>
+                    <div class="order-value" id="quoteAmount">$0.00</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="print-instructions no-print">
+            <p><strong>Note:</strong> Fill out this form and then print to PDF using your browser's print function (Ctrl+P).</p>
+        </div>
+        
+        <div class="form-container">
+            <form id="bookingForm">
+                <div class="form-section">
+                    <h2 class="section-title">Customer Information</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone Number *</label>
+                            <input type="tel" id="phoneNumber" name="phoneNumber" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="secondaryPhone">Secondary Phone (Optional)</label>
+                            <input type="tel" id="secondaryPhone" name="secondaryPhone">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <div class="vehicle-header">
+                        <h2 class="section-title">Vehicle Information</h2>
+                        <button type="button" class="btn-add-vehicle no-print" id="addVehicleBtn">+ Add Another Vehicle</button>
+                    </div>
+                    
+                    <div id="vehicles-container">
+                        <div class="vehicle-section" data-vehicle-id="1">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="vehicleMaker1">Vehicle Maker *</label>
+                                    <input type="text" id="vehicleMaker1" name="vehicleMaker1" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="vehicleModel1">Vehicle Model *</label>
+                                    <input type="text" id="vehicleModel1" name="vehicleModel1" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="vehicleYear1">Vehicle Year *</label>
+                                    <input type="number" id="vehicleYear1" name="vehicleYear1" min="1900" max="2024" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="vehicleColor1">Vehicle Color</label>
+                                    <input type="text" id="vehicleColor1" name="vehicleColor1">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="vin1">VIN (Vehicle Identification Number)</label>
+                                    <input type="text" id="vin1" name="vin1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="licensePlate1">License Plate Number</label>
+                                    <input type="text" id="licensePlate1" name="licensePlate1">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Trailer Type *</label>
+                                    <div class="radio-group">
+                                        <div class="radio-option">
+                                            <input type="radio" id="openTrailer1" name="trailerType1" value="Open" required>
+                                            <label for="openTrailer1">Open</label>
+                                        </div>
+                                        <div class="radio-option">
+                                            <input type="radio" id="enclosedTrailer1" name="trailerType1" value="Enclosed">
+                                            <label for="enclosedTrailer1">Enclosed</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Vehicle Condition *</label>
+                                    <div class="radio-group">
+                                        <div class="radio-option">
+                                            <input type="radio" id="running1" name="vehicleCondition1" value="Running" required>
+                                            <label for="running1">Running</label>
+                                        </div>
+                                        <div class="radio-option">
+                                            <input type="radio" id="nonRunning1" name="vehicleCondition1" value="Non-Running">
+                                            <label for="nonRunning1">Non-Running</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h2 class="section-title">Pick-up Information</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group narrow-field">
+                            <label for="pickupFrom">Pick up From *</label>
+                            <select id="pickupFrom" name="pickupFrom" required>
+                                <option value="">Select an option</option>
+                                <option value="Auction">Auction</option>
+                                <option value="Dealership">Dealership</option>
+                                <option value="Residency">Residency</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group narrow-field">
+                            <label for="pickupDate">Preferred Pick-up Date</label>
+                            <input type="date" id="pickupDate" name="pickupDate">
+                        </div>
+                    </div>
+                    
+                    <!-- Auction Details (Conditional) -->
+                    <div id="auctionDetails" class="conditional-field">
+                        <div class="form-row">
+                            <div class="form-group narrow-field">
+                                <label for="auctionCompany">Auction Company *</label>
+                                <select id="auctionCompany" name="auctionCompany">
+                                    <option value="">Select an auction</option>
+                                    <option value="Copart">Copart</option>
+                                    <option value="IAA">IAA</option>
+                                    <option value="Manheim Auctions">Manheim Auctions</option>
+                                    <option value="ADESA">ADESA</option>
+                                    <option value="ACV Auctions">ACV Auctions</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Gate Pin and Member Number (Conditional for Copart/IAA) -->
+                        <div id="copartIaaDetails" class="conditional-field">
+                            <div class="form-row">
+                                <div class="form-group narrow-field">
+                                    <label for="gatePin">Gate Pin</label>
+                                    <input type="text" id="gatePin" name="gatePin">
+                                </div>
+                                <div class="form-group narrow-field">
+                                    <label for="memberNumber">Member/Buyer Number</label>
+                                    <input type="text" id="memberNumber" name="memberNumber">
+                                </div>
+                                <div class="form-group narrow-field" id="lotNumberField">
+                                    <label for="lotNumber">Lot Number</label>
+                                    <input type="text" id="lotNumber" name="lotNumber">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group form-group-full">
+                            <label for="pickupInstructions">Pick up Instructions</label>
+                            <textarea id="pickupInstructions" name="pickupInstructions" rows="3" placeholder="Any special instructions for pickup location (gate codes, contact person, hours of operation, etc.)"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pickupAddress">Pick-up Address *</label>
+                            <textarea id="pickupAddress" name="pickupAddress" rows="2" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="pickupContact">Pick-up Location Contact</label>
+                            <input type="text" id="pickupContact" name="pickupContact">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h2 class="section-title">Delivery Information</h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group narrow-field">
+                            <label for="deliveredAt">Delivered At *</label>
+                            <select id="deliveredAt" name="deliveredAt" required>
+                                <option value="">Select an option</option>
+                                <option value="Dealership">Dealership</option>
+                                <option value="Residency">Residency</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group narrow-field">
+                            <label for="deliveryDate">Preferred Delivery Date</label>
+                            <input type="date" id="deliveryDate" name="deliveryDate">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group form-group-full">
+                            <label for="deliveryInstructions">Delivery Instructions</label>
+                            <textarea id="deliveryInstructions" name="deliveryInstructions" rows="3" placeholder="Any special instructions for delivery location (gate codes, contact person, hours of operation, etc.)"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="deliveryAddress">Delivery Address *</label>
+                            <textarea id="deliveryAddress" name="deliveryAddress" rows="2" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="deliveryContact">Delivery Location Contact</label>
+                            <input type="text" id="deliveryContact" name="deliveryContact">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h2 class="section-title">Additional Information</h2>
+                    <div class="form-row">
+                        <div class="form-group form-group-full">
+                            <label for="specialInstructions">Special Instructions or Notes</label>
+                            <textarea id="specialInstructions" name="specialInstructions" rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h2 class="section-title">Authorization</h2>
+                    <div class="form-row">
+                        <div class="form-group form-group-full">
+                            <p>By submitting this form, I authorize The Wize Auto Transport to contact me regarding my vehicle transport request and agree to the terms of service.</p>
+                            <div style="margin-top: 15px;">
+                                <div class="radio-option">
+                                    <input type="checkbox" id="authorization" name="authorization" required>
+                                    <label for="authorization">I agree to the terms and authorize contact *</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-submit no-print">Submit Booking Request</button>
+            </form>
+        </div>
+        
+        <footer>
+            <div class="footer-contact">
+                <div class="contact-item">
+                    <span>📞</span>
+                    <span>(307) 453-0502</span>
+                </div>
+                <div class="contact-item">
+                    <span>✉️</span>
+                    <span>support@thewizeautotransport.com</span>
+                </div>
+                <div class="contact-item">
+                    <span>🌐</span>
+                    <span>www.thewizeautotransport.com</span>
+                </div>
+            </div>
+            <div class="disclaimer">
+                <p>The Wize Auto Transport is fully licensed and insured. All transports are covered by cargo liability insurance.</p>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Authorization Modal -->
+    <div id="authModal" class="auth-modal">
+        <div class="auth-modal-content">
+            <div class="auth-modal-header">
+                <h2 class="auth-modal-title">Authorization Documents</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            
+            <div class="loading" id="pdfLoading">
+                <div class="spinner"></div>
+                <p>Generating PDF and sending emails...</p>
+            </div>
+            
+            <div id="authContent">
+                <div class="auth-page">
+                    <h2>Terms & Conditions of Service</h2>
+                    <p>By agreeing below, you, the customer, confirm that the vehicle information provided is accurate and authorize The Wize Auto Transport to proceed with scheduling and rendering the auto transport services as described.</p>
+                    
+                    <ol>
+                        <li><strong>Booking:</strong> This signed agreement confirms your booking and secures your transport date.</li>
+                        <li><strong>Vehicle Preparation:</strong> Customer is responsible for ensuring the vehicle is prepared for transport (e.g., disabling alarms, removing personal belongings, and having a quarter tank of fuel or less).</li>
+                        <li><strong>Payment:</strong> The agreed service price is due upon completion of transport before the vehicle is released, unless a deposit was previously arranged. The Payment Authorization Form (Page 2) must be completed and submitted.</li>
+                        <li><strong>Insurance:</strong> The Wize Auto Transport maintains cargo insurance on all shipments. A copy of the certificate of insurance is available upon request.</li>
+                        <li><strong>Changes & Cancellations:</strong> Please contact us immediately for any changes or to cancel service. Refer to our full policy for details.</li>
+                    </ol>
+                    
+                    <p>I have read, understood, and agree to the terms and conditions outlined above. I confirm that all vehicle information I have provided is accurate.</p>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="customerSignature">Customer Signature:</label>
+                            <input type="text" id="customerSignature" name="customerSignature" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="termsDate">Date:</label>
+                            <input type="date" id="termsDate" name="termsDate" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="auth-page">
+                    <h2>Payment Authorization Form</h2>
+                    
+                    <h3>Payment Details</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="invoiceNumber">Invoice / Reference #:</label>
+                            <input type="text" id="invoiceNumber" name="invoiceNumber" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="serviceDescription">Service Description:</label>
+                            <input type="text" id="serviceDescription" name="serviceDescription" value="Auto Transport Service" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="totalAmount">Total Amount: $</label>
+                            <input type="number" id="totalAmount" name="totalAmount" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="chargeDate">Scheduled Date of Charge:</label>
+                            <input type="date" id="chargeDate" name="chargeDate" required>
+                        </div>
+                    </div>
+                    
+                    <h3>Card Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cardholderName">Cardholder Name (as it appears on card):</label>
+                            <input type="text" id="cardholderName" name="cardholderName" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Card Type:</label>
+                            <div class="card-options">
+                                <div class="card-option">
+                                    <input type="radio" id="visa" name="cardType" value="Visa" required>
+                                    <label for="visa">Visa</label>
+                                </div>
+                                <div class="card-option">
+                                    <input type="radio" id="mastercard" name="cardType" value="MasterCard">
+                                    <label for="mastercard">MasterCard</label>
+                                </div>
+                                <div class="card-option">
+                                    <input type="radio" id="amex" name="cardType" value="Amex">
+                                    <label for="amex">Amex</label>
+                                </div>
+                                <div class="card-option">
+                                    <input type="radio" id="discover" name="cardType" value="Discover">
+                                    <label for="discover">Discover</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number:</label>
+                            <input type="text" id="cardNumber" name="cardNumber" placeholder="XXXX - XXXX - XXXX - XXXX" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expirationDate">Expiration Date:</label>
+                            <input type="text" id="expirationDate" name="expirationDate" placeholder="MM / YY" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV (3-digit code):</label>
+                            <input type="text" id="cvv" name="cvv" maxlength="3" required>
+                        </div>
+                    </div>
+                    
+                    <h3>Authorization Agreement</h3>
+                    <p>By signing below, I hereby authorize <strong>The Wize Auto Transport</strong> to charge the credit/debit card provided above for the total amount specified.</p>
+                    <p>I confirm that I am the authorized holder of this card and understand that this transaction is <strong>non-refundable</strong> once services have been rendered. I may revoke this authorization only by contacting The Wize Auto Transport <strong>before</strong> the scheduled payment processing date.</p>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="authSignature">Authorized Signature:</label>
+                            <input type="text" id="authSignature" name="authSignature" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="authDate">Date:</label>
+                            <input type="date" id="authDate" name="authDate" required>
+                        </div>
+                    </div>
+                    
+                    <p><em>*This form uses secure 256-bit SSL encryption. Your information is confidential and protected.*</em></p>
+                </div>
+                
+                <button type="button" class="btn-final-submit" id="finalSubmitBtn">Submit Authorization</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const { jsPDF } = window.jspdf;
+            const bookingForm = document.getElementById('bookingForm');
+            const addVehicleBtn = document.getElementById('addVehicleBtn');
+            const vehiclesContainer = document.getElementById('vehicles-container');
+            const pickupFromSelect = document.getElementById('pickupFrom');
+            const auctionDetails = document.getElementById('auctionDetails');
+            const auctionCompanySelect = document.getElementById('auctionCompany');
+            const copartIaaDetails = document.getElementById('copartIaaDetails');
+            const lotNumberField = document.getElementById('lotNumberField');
+            const authModal = document.getElementById('authModal');
+            const closeModal = document.querySelector('.close-modal');
+            const finalSubmitBtn = document.getElementById('finalSubmitBtn');
+            const orderNumberElement = document.getElementById('orderNumber');
+            const quoteAmountElement = document.getElementById('quoteAmount');
+            const invoiceNumberInput = document.getElementById('invoiceNumber');
+            const pdfLoading = document.getElementById('pdfLoading');
+            const authContent = document.getElementById('authContent');
+            let vehicleCount = 1;
+            
+            // Generate unique order number
+            function generateOrderNumber() {
+                const orderNum = Math.floor(10000 + Math.random() * 90000);
+                return `W${orderNum}`;
+            }
+            
+            // Fetch quote amount (simulated)
+            function fetchQuoteAmount() {
+                const amount = 500 + Math.floor(Math.random() * 1000);
+                return `$${amount}.00`;
+            }
+            
+            // Initialize order details
+            const orderNumber = generateOrderNumber();
+            orderNumberElement.textContent = orderNumber;
+            quoteAmountElement.textContent = fetchQuoteAmount();
+            
+            // Set invoice number to order number
+            invoiceNumberInput.value = orderNumber;
+            
+            // Set today's date as minimum for date inputs
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('pickupDate').min = today;
+            document.getElementById('deliveryDate').min = today;
+            document.getElementById('termsDate').value = today;
+            document.getElementById('authDate').value = today;
+            document.getElementById('chargeDate').value = today;
+            
+            // Show/hide auction details based on pickup location
+            pickupFromSelect.addEventListener('change', function() {
+                if (this.value === 'Auction') {
+                    auctionDetails.classList.add('show');
+                    auctionCompanySelect.required = true;
+                } else {
+                    auctionDetails.classList.remove('show');
+                    auctionCompanySelect.value = '';
+                    auctionCompanySelect.required = false;
+                    copartIaaDetails.classList.remove('show');
+                    lotNumberField.style.display = 'none';
+                }
+            });
+            
+            // Show/hide Copart/IAA details based on auction company
+            auctionCompanySelect.addEventListener('change', function() {
+                if (this.value === 'Copart' || this.value === 'IAA') {
+                    copartIaaDetails.classList.add('show');
+                    
+                    if (this.value === 'Copart') {
+                        lotNumberField.style.display = 'block';
+                    } else {
+                        lotNumberField.style.display = 'none';
+                    }
+                } else {
+                    copartIaaDetails.classList.remove('show');
+                    lotNumberField.style.display = 'none';
+                }
+            });
+            
+            // Add vehicle functionality
+            addVehicleBtn.addEventListener('click', function() {
+                vehicleCount++;
+                const newVehicleSection = document.createElement('div');
+                newVehicleSection.className = 'vehicle-section';
+                newVehicleSection.setAttribute('data-vehicle-id', vehicleCount);
+                
+                newVehicleSection.innerHTML = `
+                    <div class="vehicle-header">
+                        <h3>Vehicle ${vehicleCount}</h3>
+                        <button type="button" class="remove-vehicle no-print">Remove Vehicle</button>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="vehicleMaker${vehicleCount}">Vehicle Maker *</label>
+                            <input type="text" id="vehicleMaker${vehicleCount}" name="vehicleMaker${vehicleCount}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="vehicleModel${vehicleCount}">Vehicle Model *</label>
+                            <input type="text" id="vehicleModel${vehicleCount}" name="vehicleModel${vehicleCount}" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="vehicleYear${vehicleCount}">Vehicle Year *</label>
+                            <input type="number" id="vehicleYear${vehicleCount}" name="vehicleYear${vehicleCount}" min="1900" max="2024" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="vehicleColor${vehicleCount}">Vehicle Color</label>
+                            <input type="text" id="vehicleColor${vehicleCount}" name="vehicleColor${vehicleCount}">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="vin${vehicleCount}">VIN (Vehicle Identification Number)</label>
+                            <input type="text" id="vin${vehicleCount}" name="vin${vehicleCount}">
+                        </div>
+                        <div class="form-group">
+                            <label for="licensePlate${vehicleCount}">License Plate Number</label>
+                            <input type="text" id="licensePlate${vehicleCount}" name="licensePlate${vehicleCount}">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Trailer Type *</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="openTrailer${vehicleCount}" name="trailerType${vehicleCount}" value="Open" required>
+                                    <label for="openTrailer${vehicleCount}">Open</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="enclosedTrailer${vehicleCount}" name="trailerType${vehicleCount}" value="Enclosed">
+                                    <label for="enclosedTrailer${vehicleCount}">Enclosed</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Vehicle Condition *</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="running${vehicleCount}" name="vehicleCondition${vehicleCount}" value="Running" required>
+                                    <label for="running${vehicleCount}">Running</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="nonRunning${vehicleCount}" name="vehicleCondition${vehicleCount}" value="Non-Running">
+                                    <label for="nonRunning${vehicleCount}">Non-Running</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                vehiclesContainer.appendChild(newVehicleSection);
+                
+                // Add event listener to the remove button
+                newVehicleSection.querySelector('.remove-vehicle').addEventListener('click', function() {
+                    vehiclesContainer.removeChild(newVehicleSection);
+                    updateVehicleNumbers();
+                });
+            });
+            
+            // Function to update vehicle numbers after removal
+            function updateVehicleNumbers() {
+                const vehicleSections = vehiclesContainer.querySelectorAll('.vehicle-section');
+                vehicleCount = vehicleSections.length;
+                
+                vehicleSections.forEach((section, index) => {
+                    const vehicleId = index + 1;
+                    section.setAttribute('data-vehicle-id', vehicleId);
+                    section.querySelector('h3').textContent = `Vehicle ${vehicleId}`;
+                    
+                    const inputs = section.querySelectorAll('input, select, textarea');
+                    inputs.forEach(input => {
+                        const oldId = input.id;
+                        const oldName = input.name;
+                        
+                        if (oldId && oldName) {
+                            const newId = oldId.replace(/\d+$/, vehicleId);
+                            const newName = oldName.replace(/\d+$/, vehicleId);
+                            
+                            input.id = newId;
+                            input.name = newName;
+                            
+                            const label = section.querySelector(`label[for="${oldId}"]`);
+                            if (label) {
+                                label.setAttribute('for', newId);
+                            }
+                        }
+                    });
+                });
+            }
+            
+            // Generate PDF function
+            function generatePDF() {
+                const doc = new jsPDF();
+                
+                // Add company header
+                doc.setFontSize(20);
+                doc.setTextColor(26, 54, 93);
+                doc.text('The Wize Auto Transport', 105, 20, { align: 'center' });
+                
+                doc.setFontSize(12);
+                doc.setTextColor(100, 100, 100);
+                doc.text('Professional Vehicle Transportation Services', 105, 28, { align: 'center' });
+                
+                doc.setFontSize(10);
+                doc.text(`(307) 453-0502 | support@thewizeautotransport.com | www.thewizeautotransport.com`, 105, 35, { align: 'center' });
+                
+                // Add order info
+                doc.setDrawColor(212, 175, 55);
+                doc.setLineWidth(0.5);
+                doc.line(20, 40, 190, 40);
+                
+                doc.setFontSize(14);
+                doc.setTextColor(26, 54, 93);
+                doc.text('Authorization Documents', 105, 50, { align: 'center' });
+                
+                // Page 1: Terms & Conditions
+                doc.setFontSize(16);
+                doc.text('Terms & Conditions of Service', 20, 70);
+                
+                doc.setFontSize(10);
+                doc.setTextColor(0, 0, 0);
+                let yPosition = 80;
+                
+                const termsText = [
+                    "By agreeing below, you, the customer, confirm that the vehicle information provided is accurate and authorize The Wize Auto Transport to proceed with scheduling and rendering the auto transport services as described.",
+                    "",
+                    "1. Booking: This signed agreement confirms your booking and secures your transport date.",
+                    "2. Vehicle Preparation: Customer is responsible for ensuring the vehicle is prepared for transport (e.g., disabling alarms, removing personal belongings, and having a quarter tank of fuel or less).",
+                    "3. Payment: The agreed service price is due upon completion of transport before the vehicle is released, unless a deposit was previously arranged. The Payment Authorization Form (Page 2) must be completed and submitted.",
+                    "4. Insurance: The Wize Auto Transport maintains cargo insurance on all shipments. A copy of the certificate of insurance is available upon request.",
+                    "5. Changes & Cancellations: Please contact us immediately for any changes or to cancel service. Refer to our full policy for details.",
+                    "",
+                    "I have read, understood, and agree to the terms and conditions outlined above. I confirm that all vehicle information I have provided is accurate."
+                ];
+                
+                termsText.forEach(line => {
+                    if (yPosition > 270) {
+                        doc.addPage();
+                        yPosition = 20;
+                    }
+                    doc.text(line, 20, yPosition);
+                    yPosition += 7;
+                });
+                
+                // Add signature lines
+                yPosition += 10;
+                doc.text(`Customer Signature: ${document.getElementById('customerSignature').value}`, 20, yPosition);
+                doc.text(`Date: ${document.getElementById('termsDate').value}`, 120, yPosition);
+                
+                // Page 2: Payment Authorization
+                doc.addPage();
+                yPosition = 20;
+                
+                doc.setFontSize(16);
+                doc.text('Payment Authorization Form', 20, yPosition);
+                yPosition += 15;
+                
+                doc.setFontSize(12);
+                doc.text('Payment Details', 20, yPosition);
+                yPosition += 10;
+                
+                doc.setFontSize(10);
+                doc.text(`Invoice / Reference #: ${document.getElementById('invoiceNumber').value}`, 20, yPosition);
+                yPosition += 7;
+                doc.text(`Service Description: ${document.getElementById('serviceDescription').value}`, 20, yPosition);
+                yPosition += 7;
+                doc.text(`Total Amount: $${document.getElementById('totalAmount').value}`, 20, yPosition);
+                yPosition += 7;
+                doc.text(`Scheduled Date of Charge: ${document.getElementById('chargeDate').value}`, 20, yPosition);
+                yPosition += 15;
+                
+                doc.setFontSize(12);
+                doc.text('Card Information', 20, yPosition);
+                yPosition += 10;
+                
+                doc.setFontSize(10);
+                doc.text(`Cardholder Name: ${document.getElementById('cardholderName').value}`, 20, yPosition);
+                yPosition += 7;
+                
+                const cardType = document.querySelector('input[name="cardType"]:checked');
+                doc.text(`Card Type: ${cardType ? cardType.value : ''}`, 20, yPosition);
+                yPosition += 7;
+                
+                // Mask card number for security
+                const cardNumber = document.getElementById('cardNumber').value;
+                const maskedCard = cardNumber.length > 4 ? 
+                    '****-****-****-' + cardNumber.slice(-4) : cardNumber;
+                doc.text(`Card Number: ${maskedCard}`, 20, yPosition);
+                yPosition += 7;
+                
+                doc.text(`Expiration Date: ${document.getElementById('expirationDate').value}`, 20, yPosition);
+                yPosition += 15;
+                
+                doc.setFontSize(12);
+                doc.text('Authorization Agreement', 20, yPosition);
+                yPosition += 10;
+                
+                doc.setFontSize(10);
+                const authText = [
+                    "By signing below, I hereby authorize The Wize Auto Transport to charge the credit/debit card provided above for the total amount specified.",
+                    "",
+                    "I confirm that I am the authorized holder of this card and understand that this transaction is non-refundable once services have been rendered. I may revoke this authorization only by contacting The Wize Auto Transport before the scheduled payment processing date."
+                ];
+                
+                authText.forEach(line => {
+                    if (yPosition > 270) {
+                        doc.addPage();
+                        yPosition = 20;
+                    }
+                    doc.text(line, 20, yPosition, { maxWidth: 170 });
+                    yPosition += 7;
+                });
+                
+                yPosition += 10;
+                doc.text(`Authorized Signature: ${document.getElementById('authSignature').value}`, 20, yPosition);
+                doc.text(`Date: ${document.getElementById('authDate').value}`, 120, yPosition);
+                
+                yPosition += 15;
+                doc.setFontSize(8);
+                doc.setTextColor(100, 100, 100);
+                doc.text('*This form uses secure 256-bit SSL encryption. Your information is confidential and protected.*', 20, yPosition, { maxWidth: 170 });
+                
+                return doc;
+            }
+            
+            // Simulate email sending
+            function sendEmails(pdfBlob, customerEmail) {
+                const companyEmail = 'support@thewizeautotransport.com';
+                const orderNumber = document.getElementById('invoiceNumber').value;
+                
+                console.log(`PDF would be emailed to:
+                - Customer: ${customerEmail}
+                - Company: ${companyEmail}
+                - Order: ${orderNumber}
+                - PDF Size: ${(pdfBlob.size / 1024).toFixed(2)} KB`);
+                
+                return new Promise((resolve) => {
+                    setTimeout(resolve, 2000);
+                });
+            }
+            
+            // Form submission
+            bookingForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                const data = Object.fromEntries(formData);
+                
+                let isValid = true;
+                const requiredFields = ['fullName', 'phoneNumber', 'email', 'pickupFrom', 'deliveredAt',
+                                       'pickupAddress', 'deliveryAddress', 'authorization'];
+                
+                const vehicleSections = vehiclesContainer.querySelectorAll('.vehicle-section');
+                if (vehicleSections.length === 0) {
+                    isValid = false;
+                    alert('Please add at least one vehicle.');
+                }
+                
+                vehicleSections.forEach(section => {
+                    const vehicleId = section.getAttribute('data-vehicle-id');
+                    const vehicleRequiredFields = [
+                        `vehicleMaker${vehicleId}`, 
+                        `vehicleModel${vehicleId}`, 
+                        `vehicleYear${vehicleId}`,
+                        `trailerType${vehicleId}`,
+                        `vehicleCondition${vehicleId}`
+                    ];
+                    
+                    vehicleRequiredFields.forEach(field => {
+                        if (!data[field]) {
+                            isValid = false;
+                        }
+                    });
+                });
+                
+                if (pickupFromSelect.value === 'Auction' && !data.auctionCompany) {
+                    isValid = false;
+                }
+                
+                for (const field of requiredFields) {
+                    if (!data[field]) {
+                        isValid = false;
+                        break;
+                    }
+                }
+                
+                if (isValid) {
+                    authModal.style.display = 'block';
+                } else {
+                    alert('Please fill in all required fields marked with *.');
+                }
+            });
+            
+            // Close modal when clicking X
+            closeModal.addEventListener('click', function() {
+                authModal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === authModal) {
+                    authModal.style.display = 'none';
+                }
+            });
+            
+            // Final submission
+            finalSubmitBtn.addEventListener('click', async function() {
+                const authRequiredFields = [
+                    'customerSignature', 'termsDate', 'invoiceNumber', 'totalAmount',
+                    'chargeDate', 'cardholderName', 'cardType', 'cardNumber',
+                    'expirationDate', 'cvv', 'authSignature', 'authDate'
+                ];
+                
+                let authValid = true;
+                authRequiredFields.forEach(field => {
+                    const input = document.getElementById(field);
+                    if (!input.value) {
+                        authValid = false;
+                    }
+                });
+                
+                if (authValid) {
+                    authContent.style.display = 'none';
+                    pdfLoading.style.display = 'block';
+                    
+                    try {
+                        const pdfDoc = generatePDF();
+                        const pdfBlob = pdfDoc.output('blob');
+                        
+                        const customerEmail = document.getElementById('email').value;
+                        
+                        await sendEmails(pdfBlob, customerEmail);
+                        
+                        pdfDoc.save(`WizeAutoTransport_Authorization_${orderNumber}.pdf`);
+                        
+                        alert('Thank you! Your booking request and authorization have been submitted successfully. A copy has been emailed to you and our team.');
+                        
+                        // 🔥 SEND MESSAGE TO CLOSE PARENT MODAL
+                        window.parent.postMessage('closeBookingModal', '*');
+                        
+                        authModal.style.display = 'none';
+                        bookingForm.reset();
+                        
+                        const newOrderNumber = generateOrderNumber();
+                        orderNumberElement.textContent = newOrderNumber;
+                        quoteAmountElement.textContent = fetchQuoteAmount();
+                        invoiceNumberInput.value = newOrderNumber;
+                        
+                        authContent.style.display = 'block';
+                        pdfLoading.style.display = 'none';
+                        
+                    } catch (error) {
+                        console.error('Error generating PDF:', error);
+                        alert('There was an error processing your authorization. Please try again.');
+                        
+                        authContent.style.display = 'block';
+                        pdfLoading.style.display = 'none';
+                    }
+                } else {
+                    alert('Please complete all fields in the authorization form.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
